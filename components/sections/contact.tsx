@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { MotionWrapper } from "@/components/motion-wrapper"
 import { Github, Linkedin, Mail, Send, CheckCircle2, Loader2 } from "lucide-react"
 import { z } from "zod"
+import { track } from "@vercel/analytics"
 
 type FormStatus = "idle" | "loading" | "success" | "error"
 
@@ -22,6 +23,7 @@ export function ContactSection() {
   const [status, setStatus] = useState<FormStatus>("idle")
   const [errorMessage, setErrorMessage] = useState("")
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
+  const [formStartedAt] = useState<number>(() => Date.now())
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -35,6 +37,8 @@ export function ContactSection() {
       email: formData.get("email") as string,
       subject: formData.get("subject") as string,
       message: formData.get("message") as string,
+      website: formData.get("website") as string,
+      sentAt: Date.now() - formStartedAt,
     }
 
     // Validar con Zod
@@ -61,12 +65,21 @@ export function ContactSection() {
 
       if (!res.ok) {
         const errorData = await res.json()
+        track("contact_submit_error", {
+          status: res.status,
+        })
         throw new Error(errorData.error || "Error al enviar el mensaje")
       }
 
+      track("contact_submit_success", {
+        location: "contact_section",
+      })
       setStatus("success")
       ;(e.target as HTMLFormElement).reset()
     } catch (err) {
+      track("contact_submit_error", {
+        status: "exception",
+      })
       setStatus("error")
       setErrorMessage(
         err instanceof Error ? err.message : "Error al enviar el mensaje"
@@ -115,6 +128,15 @@ export function ContactSection() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <input
+                  type="text"
+                  name="website"
+                  autoComplete="off"
+                  tabIndex={-1}
+                  aria-hidden="true"
+                  className="hidden"
+                />
+
                 <div className="flex flex-col gap-4 sm:flex-row">
                   <div className="flex-1">
                     <label

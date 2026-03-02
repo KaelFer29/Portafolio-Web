@@ -1,10 +1,25 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowDown, Github, Linkedin, Mail, FileDown } from "lucide-react"
+import {
+  ArrowDown,
+  Github,
+  Linkedin,
+  Mail,
+  FileDown,
+  Eye,
+  ChevronDown,
+} from "lucide-react"
 import { personalInfo } from "@/lib/data"
 import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { motion } from "framer-motion"
+import { track } from "@vercel/analytics"
 
 function AvailabilityBadge() {
   return (
@@ -82,12 +97,39 @@ export function HeroSection() {
             <Button variant="outline" asChild>
               <Link href="#contact">Contactame</Link>
             </Button>
-            <Button variant="ghost" asChild className="gap-2">
-              <a href={personalInfo.resumeUrl} download>
-                <FileDown className="size-4" />
-                Descargar CV
-              </a>
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="secondary" className="gap-2">
+                  CV
+                  <ChevronDown className="size-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="min-w-44">
+                <DropdownMenuItem asChild>
+                  <a
+                    href={personalInfo.resumeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer"
+                    onClick={() => track("cv_preview_click", { location: "hero" })}
+                  >
+                    <Eye className="size-4" />
+                    Ver CV
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <a
+                    href={personalInfo.resumeUrl}
+                    download="CV_Kael_Fernandez_ES.pdf"
+                    className="cursor-pointer"
+                    onClick={() => track("cv_download_click", { location: "hero" })}
+                  >
+                    <FileDown className="size-4" />
+                    Descargar CV
+                  </a>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </motion.div>
 
           <motion.div

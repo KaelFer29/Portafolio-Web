@@ -26,7 +26,7 @@ export const personalInfo = {
     linkedin: "https://linkedin.com/in/kael-fernandez",
     email: "mailto:kaeldedios@gmail.com",
   },
-  resumeUrl: "/resume.pdf",
+  resumeUrl: "/CV_Kael_Fernandez_ES.pdf",
 }
 
 export interface Experience {

@@ -3,10 +3,10 @@ import Link from "next/link"
 import Image from "next/image"
 import { projects } from "@/lib/data"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { ArrowLeft, ExternalLink, Github, Briefcase, GraduationCap, User, Calendar, Building2, Info, ShieldAlert } from "lucide-react"
+import { ProjectActionButtons } from "@/components/projects/project-action-buttons"
+import { ArrowLeft, Briefcase, GraduationCap, User, Calendar, Building2, Info } from "lucide-react"
 import type { Metadata } from "next"
 
 const categoryConfig = {
@@ -96,32 +96,11 @@ export default async function ProjectPage({ params }: PageProps) {
             ))}
           </div>
 
-          <div className="flex flex-wrap gap-3 pt-2">
-            {project.demoUrl && (
-              <Button size="sm" asChild>
-                <a
-                  href={project.demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <ExternalLink className="size-4" />
-                  Demo en vivo
-                </a>
-              </Button>
-            )}
-            {project.repoUrl && (
-              <Button size="sm" variant="outline" asChild>
-                <a
-                  href={project.repoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Github className="size-4" />
-                  Repositorio
-                </a>
-              </Button>
-            )}
-          </div>
+          <ProjectActionButtons
+            slug={project.slug}
+            demoUrl={project.demoUrl}
+            repoUrl={project.repoUrl}
+          />
         </header>
 
         <Separator className="my-8" />

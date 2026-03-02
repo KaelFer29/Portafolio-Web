@@ -1,9 +1,72 @@
 import { NextResponse } from "next/server"
 
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000
+const RATE_LIMIT_MAX_REQUESTS = 5
+const MIN_FORM_FILL_TIME_MS = 1500
+
+type RateLimitStore = Map<string, number[]>
+
+declare global {
+  var __contactRateLimitStore__: RateLimitStore | undefined
+}
+
+function getRateLimitStore(): RateLimitStore {
+  if (!globalThis.__contactRateLimitStore__) {
+    globalThis.__contactRateLimitStore__ = new Map<string, number[]>()
+  }
+  return globalThis.__contactRateLimitStore__
+}
+
+function getClientIp(request: Request): string {
+  const forwardedFor = request.headers.get("x-forwarded-for")
+  if (forwardedFor) {
+    return forwardedFor.split(",")[0]?.trim() || "unknown"
+  }
+  return request.headers.get("x-real-ip") || "unknown"
+}
+
+function isRateLimited(ip: string): boolean {
+  const store = getRateLimitStore()
+  const now = Date.now()
+  const attempts = (store.get(ip) || []).filter(
+    (timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS
+  )
+
+  if (attempts.length >= RATE_LIMIT_MAX_REQUESTS) {
+    store.set(ip, attempts)
+    return true
+  }
+
+  attempts.push(now)
+  store.set(ip, attempts)
+  return false
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { name, email, subject, message } = body
+    const { name, email, subject, message, website, sentAt } = body
+    const clientIp = getClientIp(request)
+
+    // Honeypot: si el campo oculto viene con contenido, es probable bot.
+    if (typeof website === "string" && website.trim().length > 0) {
+      return NextResponse.json({ success: true, message: "Mensaje recibido" })
+    }
+
+    // Tiempo mínimo de llenado del formulario para evitar bots rápidos.
+    if (typeof sentAt !== "number" || sentAt < MIN_FORM_FILL_TIME_MS) {
+      return NextResponse.json(
+        { error: "No se pudo validar el formulario. Intenta nuevamente." },
+        { status: 400 }
+      )
+    }
+
+    if (isRateLimited(clientIp)) {
+      return NextResponse.json(
+        { error: "Demasiados intentos. Intenta nuevamente en unos minutos." },
+        { status: 429 }
+      )
+    }
 
     // Validate required fields
     if (!name || !email || !subject || !message) {
@@ -18,6 +81,13 @@ export async function POST(request: Request) {
     if (!emailRegex.test(email)) {
       return NextResponse.json(
         { error: "Email invalido" },
+        { status: 400 }
+      )
+    }
+
+    if (name.length > 120 || subject.length > 160 || message.length > 5000) {
+      return NextResponse.json(
+        { error: "El contenido excede el tamaño permitido" },
         { status: 400 }
       )
     }

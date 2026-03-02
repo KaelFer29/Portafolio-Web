@@ -1,13 +1,22 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 
 const SECTION_IDS = ["about", "experience", "projects", "skills", "contact"]
 
 export function useActiveSection() {
   const [activeSection, setActiveSection] = useState<string>("")
+  const pathname = usePathname()
+  const isHome = pathname === "/"
 
   useEffect(() => {
+    // Resetear activeSection cuando no estamos en home
+    if (!isHome) {
+      setActiveSection("")
+      return
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -28,7 +37,7 @@ export function useActiveSection() {
     }
 
     return () => observer.disconnect()
-  }, [])
+  }, [isHome])
 
   return activeSection
 }

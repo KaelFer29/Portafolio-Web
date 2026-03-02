@@ -1,11 +1,19 @@
 import { notFound } from "next/navigation"
 import Link from "next/link"
+import Image from "next/image"
 import { projects } from "@/lib/data"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import { ArrowLeft, ExternalLink, Github } from "lucide-react"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { ArrowLeft, ExternalLink, Github, Briefcase, GraduationCap, User, Calendar, Building2, Info, ShieldAlert } from "lucide-react"
 import type { Metadata } from "next"
+
+const categoryConfig = {
+  professional: { label: "Laboral", icon: Briefcase, color: "text-blue-500 bg-blue-500/10" },
+  academic: { label: "Académico", icon: GraduationCap, color: "text-purple-500 bg-purple-500/10" },
+  personal: { label: "Personal", icon: User, color: "text-green-500 bg-green-500/10" },
+}
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -37,6 +45,9 @@ export default async function ProjectPage({ params }: PageProps) {
     notFound()
   }
 
+  const categoryInfo = categoryConfig[project.category]
+  const CategoryIcon = categoryInfo.icon
+
   return (
     <div className="pt-24 pb-16 px-6">
       <div className="mx-auto max-w-3xl">
@@ -49,9 +60,29 @@ export default async function ProjectPage({ params }: PageProps) {
         </Link>
 
         <header className="flex flex-col gap-4">
+          <div className="flex items-center gap-3">
+            <div className={`flex items-center gap-2 rounded-full px-3 py-1.5 ${categoryInfo.color}`}>
+              <CategoryIcon className="size-4" />
+              <span className="text-sm font-medium">{categoryInfo.label}</span>
+            </div>
+          </div>
+
           <h1 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
             {project.title}
           </h1>
+
+          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <Calendar className="size-4" />
+              <span>{project.period}</span>
+            </div>
+            {project.institution && (
+              <div className="flex items-center gap-2">
+                <Building2 className="size-4" />
+                <span>{project.institution}</span>
+              </div>
+            )}
+          </div>
 
           <p className="text-justify text-lg leading-relaxed text-muted-foreground">
             {project.description}
@@ -96,6 +127,64 @@ export default async function ProjectPage({ params }: PageProps) {
         <Separator className="my-8" />
 
         <section className="flex flex-col gap-8">
+          {project.slug === "sistema-calificaciones-municipalidad" && (
+            <Alert className="border-blue-200/60 bg-gradient-to-r from-blue-50/50 to-indigo-50/50 dark:border-blue-800/40 dark:from-blue-950/30 dark:to-indigo-950/30">
+              <Info className="text-blue-600 dark:text-blue-400" />
+              <AlertTitle className="text-blue-900 dark:text-blue-100 font-semibold">
+                Video demostrativo con datos ficticios.
+              </AlertTitle>
+              <AlertDescription className="text-justify text-blue-800/90 dark:text-blue-200/80 leading-relaxed">
+                Este proyecto fue desarrollado para la Municipalidad de Vitacura y maneja 
+                información confidencial de funcionarios públicos. Por razones de privacidad 
+                y seguridad, el video y las imágenes que verás a continuación utilizan únicamente 
+                datos ficticios creados para fines demostrativos, no información real de la 
+                institución ni de sus funcionarios.
+              </AlertDescription>
+            </Alert>
+          )}
+
+          {project.videoUrl && (
+            <div>
+              <h2 className="mb-3 text-lg font-semibold text-foreground">
+                Video demostración
+              </h2>
+              <div className="relative aspect-video overflow-hidden rounded-lg border border-border bg-muted">
+                <video
+                  controls
+                  className="absolute inset-0 size-full object-contain"
+                  poster={project.image}
+                >
+                  <source src={project.videoUrl} type="video/mp4" />
+                  Tu navegador no soporta el elemento de video.
+                </video>
+              </div>
+            </div>
+          )}
+
+          {project.gallery && project.gallery.length > 0 && (
+            <div>
+              <h2 className="mb-3 text-lg font-semibold text-foreground">
+                Galería del proyecto
+              </h2>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {project.gallery.map((image, index) => (
+                  <div
+                    key={index}
+                    className="relative aspect-video overflow-hidden rounded-lg border border-border bg-muted"
+                  >
+                    <Image
+                      src={image}
+                      alt={`${project.title} - Captura ${index + 1}`}
+                      fill
+                      className="object-cover transition-transform hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div>
             <h2 className="mb-3 text-lg font-semibold text-foreground">
               Descripción del proyecto

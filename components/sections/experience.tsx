@@ -16,7 +16,7 @@ export function ExperienceSection() {
             02.
           </span>
           <h2 className="mt-2 text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-            Experiencia
+            Experiencia Laboral
           </h2>
         </MotionWrapper>
 

@@ -8,18 +8,18 @@ export const personalInfo = {
   name: "Kael Fernández Hernández",
   title: "FullStack Developer and Computer Science Student",
   location: "Chile",
-  university: "Universidad de Chile",
+  university: "Pontificia Universidad Católica de Chile",
   careerYear: "4to año",
-  career: "Lic. en Ingenieria en Ciencias de la Computacion",
+  career: "Lic. en Ingeniería en Ciencias de la Computación",
   email: "kaeldedios@gmail.com",
   available: true,
-  bio: "Estudiante de cuarto ano de Licenciatura en Ingenieria en Ciencias de la Computacion con experiencia practica en desarrollo FullStack. Apasionado por construir soluciones de software elegantes, escalables y con impacto real.",
+  bio: "Estudiante de cuarto año de Licenciatura en Ingeniería en Ciencias de la Computación con experiencia práctica en desarrollo FullStack. Apasionado por construir soluciones de software elegantes, escalables y con impacto real.",
   shortBio:
-    "Desarrollo software que resuelve problemas reales. Me apasiona la interseccion entre la teoria de CS y la ingenieria de software practica.",
+    "Desarrollo software que resuelve problemas reales. Me apasiona la intersección entre la teoría de CS y la ingeniería de software práctica.",
   aboutParagraphs: [
-    "Soy un desarrollador FullStack y estudiante de Ciencias de la Computacion en mi cuarto ano de carrera. Mi formacion me ha dado una solida base en algoritmos, estructuras de datos, sistemas operativos y teoria de la computacion, mientras que mi experiencia practica me ha permitido aplicar estos conocimientos en proyectos reales.",
-    "Durante mi practica profesional y proyectos academicos, he trabajado con diversas tecnologias tanto en frontend como backend, siempre buscando escribir codigo limpio, mantenible y eficiente. Me interesa especialmente el diseno de sistemas, la optimizacion de rendimiento y las arquitecturas escalables.",
-    "Fuera del codigo, disfruto aprender sobre nuevas tecnologias, contribuir a proyectos open source y compartir conocimiento con la comunidad de desarrolladores.",
+    "Soy un desarrollador FullStack y estudiante de Ciencias de la Computación en mi cuarto año de carrera. Mi formación me ha dado una sólida base en algoritmos, estructuras de datos, sistemas operativos y teoría de la computación, mientras que mi experiencia práctica me ha permitido aplicar estos conocimientos en proyectos reales.",
+    "Durante mi práctica profesional y proyectos académicos, he trabajado con diversas tecnologías tanto en frontend como backend, siempre buscando escribir código limpio, mantenible y eficiente. Me interesa especialmente el diseño de sistemas, la optimización de rendimiento y las arquitecturas escalables.",
+    "Fuera del código, disfruto aprender sobre nuevas tecnologías, contribuir a proyectos open source y compartir conocimiento con la comunidad de desarrolladores.",
   ],
   socialLinks: {
     github: "https://github.com/KaelFer29",
@@ -44,7 +44,7 @@ export const experiences: Experience[] = [
     role: "Practicante de Desarrollo FullStack",
     period: "Ene 2025 - Mar 2025",
     description:
-      "Desarrollo de features para la plataforma principal de la empresa. Implementacion de APIs RESTful, optimizacion de queries en base de datos y desarrollo de componentes de interfaz de usuario. Colaboracion en equipo usando metodologias agiles.",
+      "Desarrollo de features para la plataforma principal de la empresa. Implementación de APIs RESTful, optimización de queries en base de datos y desarrollo de componentes de interfaz de usuario. Colaboración en equipo usando metodologías ágiles.",
     technologies: ["React", "Node.js", "PostgreSQL", "TypeScript", "Docker"],
     type: "internship",
   },
@@ -53,7 +53,7 @@ export const experiences: Experience[] = [
     role: "Desarrollador FullStack",
     period: "Jul 2024 - Dic 2024",
     description:
-      "Diseno e implementacion de una aplicacion web completa para un cliente. Arquitectura de la base de datos, desarrollo del backend API y construccion del frontend responsive.",
+      "Diseño e implementación de una aplicación web completa para un cliente. Arquitectura de la base de datos, desarrollo del backend API y construcción del frontend responsive.",
     technologies: ["Next.js", "Tailwind CSS", "Prisma", "PostgreSQL"],
     type: "freelance",
   },
@@ -77,9 +77,9 @@ export const projects: Project[] = [
     slug: "proyecto-plataforma-web",
     title: "Plataforma Web de Gestion",
     description:
-      "Aplicacion web FullStack para gestion de recursos con autenticacion, dashboard interactivo y reportes en tiempo real.",
+      "Aplicación web FullStack para gestión de recursos con autenticación, dashboard interactivo y reportes en tiempo real.",
     longDescription:
-      "Plataforma completa de gestion de recursos desarrollada como proyecto principal durante mi practica profesional. Incluye sistema de autenticacion seguro, dashboard con visualizaciones de datos en tiempo real, gestion CRUD completa y generacion de reportes exportables. La arquitectura sigue principios de clean architecture con separacion clara de responsabilidades.",
+      "Plataforma completa de gestión de recursos desarrollada como proyecto principal durante mi práctica profesional. Incluye sistema de autenticación seguro, dashboard con visualizaciones de datos en tiempo real, gestión CRUD completa y generación de reportes exportables. La arquitectura sigue principios de clean architecture con separación clara de responsabilidades.",
     technologies: [
       "React",
       "TypeScript",
@@ -89,8 +89,8 @@ export const projects: Project[] = [
       "Docker",
     ],
     highlights: [
-      "Autenticacion JWT con refresh tokens",
-      "Dashboard con graficos en tiempo real",
+      "Autenticación JWT con refresh tokens",
+      "Dashboard con gráficos en tiempo real",
       "API RESTful documentada con Swagger",
       "Deploy automatizado con CI/CD",
     ],
@@ -103,14 +103,14 @@ export const projects: Project[] = [
     slug: "algoritmos-visualizer",
     title: "Algoritmos Visualizer",
     description:
-      "Herramienta interactiva para visualizar algoritmos de ordenamiento, busqueda y grafos con animaciones paso a paso.",
+      "Herramienta interactiva para visualizar algoritmos de ordenamiento, búsqueda y grafos con animaciones paso a paso.",
     longDescription:
-      "Aplicacion educativa que permite visualizar el funcionamiento interno de diversos algoritmos clasicos de Ciencias de la Computacion. Incluye algoritmos de ordenamiento (QuickSort, MergeSort, HeapSort), busqueda en grafos (BFS, DFS, Dijkstra) y estructuras de datos (arboles AVL, hash tables). Cada algoritmo se presenta con animaciones paso a paso y analisis de complejidad.",
+      "Aplicación educativa que permite visualizar el funcionamiento interno de diversos algoritmos clásicos de Ciencias de la Computación. Incluye algoritmos de ordenamiento (QuickSort, MergeSort, HeapSort), búsqueda en grafos (BFS, DFS, Dijkstra) y estructuras de datos (árboles AVL, hash tables). Cada algoritmo se presenta con animaciones paso a paso y análisis de complejidad.",
     technologies: ["Next.js", "TypeScript", "Framer Motion", "Tailwind CSS"],
     highlights: [
-      "Visualizacion paso a paso de 15+ algoritmos",
-      "Controles de velocidad y tamano de input",
-      "Analisis de complejidad en tiempo real",
+      "Visualización paso a paso de 15+ algoritmos",
+      "Controles de velocidad y tamaño de input",
+      "Análisis de complejidad en tiempo real",
       "Responsive y accesible",
     ],
     image: "/projects/algoritmos-visualizer.jpg",
@@ -121,9 +121,9 @@ export const projects: Project[] = [
     slug: "sistema-chat",
     title: "Sistema de Chat en Tiempo Real",
     description:
-      "Aplicacion de mensajeria en tiempo real con WebSockets, salas de chat y notificaciones push.",
+      "Aplicación de mensajería en tiempo real con WebSockets, salas de chat y notificaciones push.",
     longDescription:
-      "Sistema de chat que soporta comunicacion en tiempo real mediante WebSockets. Permite crear salas de chat publicas y privadas, enviar mensajes con formato, compartir archivos y recibir notificaciones push. El backend maneja la concurrencia con un sistema de eventos eficiente.",
+      "Sistema de chat que soporta comunicación en tiempo real mediante WebSockets. Permite crear salas de chat públicas y privadas, enviar mensajes con formato, compartir archivos y recibir notificaciones push. El backend maneja la concurrencia con un sistema de eventos eficiente.",
     technologies: [
       "React",
       "Socket.io",
@@ -133,8 +133,8 @@ export const projects: Project[] = [
       "Tailwind CSS",
     ],
     highlights: [
-      "Mensajeria en tiempo real con WebSockets",
-      "Salas publicas y privadas",
+      "Mensajería en tiempo real con WebSockets",
+      "Salas públicas y privadas",
       "Sistema de notificaciones push",
       "Manejo eficiente de concurrencia",
     ],
@@ -148,7 +148,7 @@ export const projects: Project[] = [
     description:
       "Arquitectura de microservicios con gateway API, service discovery y monitoreo distribuido.",
     longDescription:
-      "Proyecto academico que implementa una arquitectura de microservicios completa. Incluye un API Gateway centralizado, service discovery automatico, circuit breaker pattern, y monitoreo distribuido con metricas y logs centralizados. Cada servicio se despliega de forma independiente usando contenedores Docker.",
+      "Proyecto académico que implementa una arquitectura de microservicios completa. Incluye un API Gateway centralizado, service discovery automático, circuit breaker pattern, y monitoreo distribuido con métricas y logs centralizados. Cada servicio se despliega de forma independiente usando contenedores Docker.",
     technologies: [
       "Go",
       "gRPC",
@@ -159,7 +159,7 @@ export const projects: Project[] = [
     ],
     highlights: [
       "API Gateway con rate limiting",
-      "Service discovery automatico",
+      "Service discovery automático",
       "Circuit breaker pattern",
       "Monitoreo con Prometheus y Grafana",
     ],

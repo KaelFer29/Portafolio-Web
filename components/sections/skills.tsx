@@ -25,11 +25,11 @@ export function SkillsSection() {
         >
           {skillCategories.map((category) => (
             <StaggerItem key={category.name}>
-              <div className="flex flex-col gap-3 rounded-lg border border-border bg-card p-6">
+              <div className="flex h-full min-h-[180px] flex-col gap-3 rounded-lg border border-border bg-card p-6">
                 <h3 className="text-sm font-semibold text-foreground">
                   {category.name}
                 </h3>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-1 flex-wrap content-start gap-1.5">
                   {category.skills.map((skill) => (
                     <Badge
                       key={skill}

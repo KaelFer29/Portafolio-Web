@@ -23,8 +23,8 @@ export function ProjectsSection() {
             Proyectos
           </h2>
           <p className="mt-3 max-w-lg text-muted-foreground">
-            Una seleccion de proyectos en los que he trabajado, desde
-            aplicaciones web hasta herramientas de visualizacion.
+            Una selección de proyectos en los que he trabajado, desde
+            aplicaciones web hasta herramientas de visualización.
           </p>
         </MotionWrapper>
 
@@ -43,7 +43,7 @@ export function ProjectsSection() {
                     <ArrowUpRight className="size-4 shrink-0 text-muted-foreground opacity-0 transition-all group-hover:opacity-100" />
                   </div>
 
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  <p className="mt-2 flex-1 text-justify text-sm leading-relaxed text-muted-foreground">
                     {project.description}
                   </p>
 

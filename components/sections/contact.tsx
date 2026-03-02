@@ -7,17 +7,27 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { MotionWrapper } from "@/components/motion-wrapper"
 import { Github, Linkedin, Mail, Send, CheckCircle2, Loader2 } from "lucide-react"
+import { z } from "zod"
 
 type FormStatus = "idle" | "loading" | "success" | "error"
+
+const contactFormSchema = z.object({
+  name: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
+  email: z.string().email("Email inválido"),
+  subject: z.string().min(3, "El asunto debe tener al menos 3 caracteres"),
+  message: z.string().min(10, "El mensaje debe tener al menos 10 caracteres"),
+})
 
 export function ContactSection() {
   const [status, setStatus] = useState<FormStatus>("idle")
   const [errorMessage, setErrorMessage] = useState("")
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setStatus("loading")
     setErrorMessage("")
+    setFieldErrors({})
 
     const formData = new FormData(e.currentTarget)
     const data = {
@@ -25,6 +35,21 @@ export function ContactSection() {
       email: formData.get("email") as string,
       subject: formData.get("subject") as string,
       message: formData.get("message") as string,
+    }
+
+    // Validar con Zod
+    const validation = contactFormSchema.safeParse(data)
+    if (!validation.success) {
+      const errors: Record<string, string> = {}
+      validation.error.errors.forEach((err) => {
+        if (err.path[0]) {
+          errors[err.path[0] as string] = err.message
+        }
+      })
+      setFieldErrors(errors)
+      setStatus("error")
+      setErrorMessage("Por favor corrige los errores en el formulario")
+      return
     }
 
     try {
@@ -77,7 +102,7 @@ export function ContactSection() {
                     Mensaje enviado
                   </h3>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    Gracias por contactarme. Te respondere lo antes posible.
+                    Gracias por contactarme. Te responderé lo antes posible.
                   </p>
                 </div>
                 <Button
@@ -104,7 +129,13 @@ export function ContactSection() {
                       placeholder="Tu nombre"
                       required
                       disabled={status === "loading"}
+                      className={fieldErrors.name ? "border-destructive" : ""}
                     />
+                    {fieldErrors.name && (
+                      <p className="mt-1 text-xs text-destructive">
+                        {fieldErrors.name}
+                      </p>
+                    )}
                   </div>
                   <div className="flex-1">
                     <label
@@ -120,7 +151,13 @@ export function ContactSection() {
                       placeholder="tu@email.com"
                       required
                       disabled={status === "loading"}
+                      className={fieldErrors.email ? "border-destructive" : ""}
                     />
+                    {fieldErrors.email && (
+                      <p className="mt-1 text-xs text-destructive">
+                        {fieldErrors.email}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -137,7 +174,13 @@ export function ContactSection() {
                     placeholder="Asunto del mensaje"
                     required
                     disabled={status === "loading"}
+                    className={fieldErrors.subject ? "border-destructive" : ""}
                   />
+                  {fieldErrors.subject && (
+                    <p className="mt-1 text-xs text-destructive">
+                      {fieldErrors.subject}
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -150,11 +193,17 @@ export function ContactSection() {
                   <Textarea
                     id="message"
                     name="message"
-                    placeholder="Escribe tu mensaje aqui..."
+                    placeholder="Escribe tu mensaje aquí..."
                     rows={5}
                     required
                     disabled={status === "loading"}
+                    className={fieldErrors.message ? "border-destructive" : ""}
                   />
+                  {fieldErrors.message && (
+                    <p className="mt-1 text-xs text-destructive">
+                      {fieldErrors.message}
+                    </p>
+                  )}
                 </div>
 
                 {status === "error" && (
@@ -189,7 +238,7 @@ export function ContactSection() {
                   Contacto directo
                 </h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Tambien puedes contactarme directamente por email o redes
+                  También puedes contactarme directamente por email o redes
                   sociales.
                 </p>
               </div>

@@ -56,3 +56,6 @@ Thumbs.db
 .cache/
 .turbo/
 .contentlayer/
+
+# Documentación
+DEPLOYMENT.md

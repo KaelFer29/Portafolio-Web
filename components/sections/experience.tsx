@@ -56,7 +56,7 @@ export function ExperienceSection() {
                       {exp.period}
                     </p>
                   </div>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  <p className="mt-3 text-justify text-sm leading-relaxed text-muted-foreground">
                     {exp.description}
                   </p>
                   <div className="mt-3 flex flex-wrap gap-1.5">

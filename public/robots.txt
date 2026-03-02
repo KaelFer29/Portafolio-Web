@@ -1,0 +1,10 @@
+# Sitemap para SEO
+# Esta es una referencia manual. Next.js puede generar uno automáticamente.
+
+Sitemap: https://tudominio.com/sitemap.xml
+
+User-agent: *
+Allow: /
+
+# Opcional: bloquear directorios privados
+Disallow: /api/

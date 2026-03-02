@@ -27,8 +27,8 @@ export default function ProjectsPage() {
           Todos los Proyectos
         </h1>
         <p className="mt-3 max-w-lg text-muted-foreground">
-          Una coleccion completa de los proyectos en los que he trabajado,
-          tanto personales como academicos y profesionales.
+          Una colección completa de los proyectos en los que he trabajado,
+          tanto personales como académicos y profesionales.
         </p>
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -53,7 +53,7 @@ export default function ProjectsPage() {
                   <ArrowUpRight className="size-4 shrink-0 text-muted-foreground opacity-0 transition-all group-hover:opacity-100" />
                 </div>
 
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-2 flex-1 text-justify text-sm leading-relaxed text-muted-foreground">
                   {project.description}
                 </p>
 

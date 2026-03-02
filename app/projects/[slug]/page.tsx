@@ -53,7 +53,7 @@ export default async function ProjectPage({ params }: PageProps) {
             {project.title}
           </h1>
 
-          <p className="text-lg leading-relaxed text-muted-foreground">
+          <p className="text-justify text-lg leading-relaxed text-muted-foreground">
             {project.description}
           </p>
 
@@ -98,9 +98,9 @@ export default async function ProjectPage({ params }: PageProps) {
         <section className="flex flex-col gap-8">
           <div>
             <h2 className="mb-3 text-lg font-semibold text-foreground">
-              Descripcion del proyecto
+              Descripción del proyecto
             </h2>
-            <p className="leading-relaxed text-muted-foreground">
+            <p className="text-justify leading-relaxed text-muted-foreground">
               {project.longDescription}
             </p>
           </div>
@@ -126,7 +126,7 @@ export default async function ProjectPage({ params }: PageProps) {
 
           <div>
             <h2 className="mb-3 text-lg font-semibold text-foreground">
-              Stack tecnologico
+              Stack tecnológico
             </h2>
             <div className="flex flex-wrap gap-2">
               {project.technologies.map((tech) => (

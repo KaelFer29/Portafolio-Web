@@ -21,7 +21,7 @@ export function AboutSection() {
               {personalInfo.aboutParagraphs.map((paragraph, i) => (
                 <p
                   key={i}
-                  className="leading-relaxed text-muted-foreground"
+                  className="text-justify leading-relaxed text-muted-foreground"
                 >
                   {paragraph}
                 </p>
@@ -31,44 +31,44 @@ export function AboutSection() {
 
           <MotionWrapper delay={0.2} className="lg:w-72">
             <div className="flex flex-col gap-4 rounded-lg border border-border bg-card p-6">
-              <div className="flex items-center gap-3">
-                <div className="flex size-9 items-center justify-center rounded-md bg-secondary">
-                  <GraduationCap className="size-4 text-secondary-foreground" />
+              <div className="flex items-start gap-3">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-secondary">
+                  <GraduationCap className="size-5 text-secondary-foreground" />
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-foreground">
+                <div className="flex-1">
+                  <p className="text-sm font-medium leading-snug text-foreground">
                     {personalInfo.career}
                   </p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="mt-1 text-xs text-muted-foreground">
                     {personalInfo.university}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
-                <div className="flex size-9 items-center justify-center rounded-md bg-secondary">
-                  <Calendar className="size-4 text-secondary-foreground" />
+              <div className="flex items-start gap-3">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-secondary">
+                  <Calendar className="size-5 text-secondary-foreground" />
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-foreground">
+                <div className="flex-1">
+                  <p className="text-sm font-medium leading-snug text-foreground">
                     {personalInfo.careerYear}
                   </p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="mt-1 text-xs text-muted-foreground">
                     En curso
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3">
-                <div className="flex size-9 items-center justify-center rounded-md bg-secondary">
-                  <MapPin className="size-4 text-secondary-foreground" />
+              <div className="flex items-start gap-3">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-secondary">
+                  <MapPin className="size-5 text-secondary-foreground" />
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-foreground">
+                <div className="flex-1">
+                  <p className="text-sm font-medium leading-snug text-foreground">
                     {personalInfo.location}
                   </p>
-                  <p className="text-xs text-muted-foreground">
-                    Disponible remoto
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    Disponible presencial
                   </p>
                 </div>
               </div>

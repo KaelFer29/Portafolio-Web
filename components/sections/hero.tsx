@@ -19,7 +19,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { motion } from "framer-motion"
-import { trackEvent } from "@/lib/analytics"
 
 function AvailabilityBadge() {
   return (
@@ -111,7 +110,6 @@ export function HeroSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="cursor-pointer"
-                    onClick={() => trackEvent("cv_preview_click", { location: "hero" })}
                   >
                     <Eye className="size-4" />
                     Ver CV
@@ -122,7 +120,6 @@ export function HeroSection() {
                     href={personalInfo.resumeUrl}
                     download="CV_Kael_Fernandez_ES.pdf"
                     className="cursor-pointer"
-                    onClick={() => trackEvent("cv_download_click", { location: "hero" })}
                   >
                     <FileDown className="size-4" />
                     Descargar CV

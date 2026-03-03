@@ -8,7 +8,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { MotionWrapper } from "@/components/motion-wrapper"
 import { Github, Linkedin, Mail, Send, CheckCircle2, Loader2 } from "lucide-react"
 import { z } from "zod"
-import { trackEvent } from "@/lib/analytics"
 
 type FormStatus = "idle" | "loading" | "success" | "error"
 
@@ -65,21 +64,12 @@ export function ContactSection() {
 
       if (!res.ok) {
         const errorData = await res.json()
-        trackEvent("contact_submit_error", {
-          status: res.status,
-        })
         throw new Error(errorData.error || "Error al enviar el mensaje")
       }
 
-      trackEvent("contact_submit_success", {
-        location: "contact_section",
-      })
       setStatus("success")
       ;(e.target as HTMLFormElement).reset()
     } catch (err) {
-      trackEvent("contact_submit_error", {
-        status: "exception",
-      })
       setStatus("error")
       setErrorMessage(
         err instanceof Error ? err.message : "Error al enviar el mensaje"

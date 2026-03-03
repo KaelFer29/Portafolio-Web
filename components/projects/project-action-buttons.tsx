@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Github } from "lucide-react"
-import { trackEvent } from "@/lib/analytics"
 
 interface ProjectActionButtonsProps {
   slug: string
@@ -19,7 +18,6 @@ export function ProjectActionButtons({ slug, demoUrl, repoUrl }: ProjectActionBu
             href={demoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => trackEvent("project_demo_click", { slug })}
           >
             <ExternalLink className="size-4" />
             Demo en vivo
@@ -32,7 +30,6 @@ export function ProjectActionButtons({ slug, demoUrl, repoUrl }: ProjectActionBu
             href={repoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => trackEvent("project_repo_click", { slug })}
           >
             <Github className="size-4" />
             Repositorio
